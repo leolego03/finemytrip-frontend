@@ -1,0 +1,12 @@
+@import "./fonts.css";
+@import "tailwindcss";
+
+* {
+  font-family: 'Noto Sans', sans-serif;
+}
+body {
+  margin: 0;
+}
+body.active {
+  overflow: hidden;
+}
