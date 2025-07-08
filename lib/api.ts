@@ -137,7 +137,7 @@ export interface ProductItem {
   imgSrc: string
   discountRate?: number
   title: string
-  infoGroup: string
+  infoGroup: string[]
   prevPrice: number
   currPrice: number
   rating: number

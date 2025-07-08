@@ -89,7 +89,7 @@ export default function ProductDetailPage() {
             <div className="product-detail-sidebar bg-white p-3 w-full">
               <div className="group-required-info mb-6">
                 <div className="hash-tag-group text-sm mb-2">
-                  {productDetail.infoGroup.split('|').map((tag) => `#${tag}`).join(' ')}
+                  {productDetail.infoGroup.map((tag) => `#${tag}`).join(' ')}
                 </div>
                 <div className="badge-group flex flex-wrap gap-2 text-xs mb-4">
                   <span className="badge-product-required bg-gray-200 px-2 py-1 rounded focus:text-red-600">Limited-Time discount</span>

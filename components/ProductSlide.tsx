@@ -12,7 +12,7 @@ export interface ProductItem {
   imgSrc: string
   discountRate?: number
   title: string
-  infoGroup: string
+  infoGroup: string[]
   prevPrice: number
   currPrice: number
   rating: number
@@ -66,7 +66,7 @@ export default function ProductSlide({
                   <div className="overview flex flex-col min-h-[95px] mt-[5px]">
                     <h4 className="text-xs font-normal mb-2">{p.title}</h4>
                     <div className="product-info text-[1px] text-[#999] mb-1">
-                      {p.infoGroup.split('|').join(' · ')}
+                      {p.infoGroup.join(' · ')}
                     </div>
                     <div className="product-price text-[10px] mb-1 flex items-baseline space-x-2">
                       {typeof p.discountRate === 'number' && (
