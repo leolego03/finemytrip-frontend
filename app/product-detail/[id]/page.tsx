@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { productApi, ProductItem } from '../../../lib/api'
+import { getStarTypes } from '../../../utils/getStarTypes'
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -102,11 +103,18 @@ export default function ProductDetailPage() {
                   </h4>
                   <div className="product-review flex items-center text-sm mb-3">
                     <span className="stars flex space-x-0.5 text-yellow-400 mr-2">
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-half"></i>
+                      {getStarTypes(productDetail.rating).map((starType, index) => (
+                        <i
+                          key={`start-icon-${index}`}
+                          className={`bi ${
+                            starType === 'full'
+                              ? 'bi-star-fill'
+                              : starType === 'half'
+                              ? 'bi-star-half'
+                              : 'bi-star'
+                          }`}
+                        />
+                      ))}
                     </span>
                     <span className="rating mr-2">{productDetail.rating.toFixed(1)}</span>
                     <span className="trainee text-gray-500">{productDetail.sold.toLocaleString()} Sold</span>

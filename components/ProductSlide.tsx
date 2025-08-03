@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getStarTypes } from '../utils/getStarTypes'
 
 export interface ProductItem {
   id: number,
@@ -83,11 +84,18 @@ export default function ProductSlide({
                     </div>
                     <div className="product-review text-[10px] font-normal flex items-center space-x-1">
                       <span className="stars flex space-x-0.5 text-[#ffd912]">
-                        <i className="bi bi-star-fill" />
-                        <i className="bi bi-star-fill" />
-                        <i className="bi bi-star-fill" />
-                        <i className="bi bi-star-fill" />
-                        <i className="bi bi-star-half" />
+                        {getStarTypes(p.rating).map((starType, index) => (
+                          <i
+                            key={`start-icon-${index}`}
+                            className={`bi ${
+                              starType === 'full'
+                                ? 'bi-star-fill'
+                                : starType === 'half'
+                                ? 'bi-star-half'
+                                : 'bi-star'
+                            }`}
+                          />
+                        ))}
                       </span>
                       <span
                         className="rating ml-[5px] after:content-['|'] after:text-gray-400 after:text-[10px] after:ml-[5px] after:inline-block after:translate-y-[-2px]"
