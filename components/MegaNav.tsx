@@ -108,6 +108,7 @@ export default function MegaNav({ open, onClose }: MegaNavProps) {
             <input
               type="text"
               placeholder="What are you looking for?"
+              suppressHydrationWarning
               className="w-full bg-gray-700 text-white placeholder-gray-300 px-4 py-2 rounded-full"
             />
             <Image

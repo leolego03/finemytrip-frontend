@@ -84,6 +84,7 @@ const Header: React.FC = () => {
               <input
                 type="text"
                 placeholder="What are you looking for?"
+                suppressHydrationWarning
                 className="
                   w-full bg-gray-100 px-4 py-2 rounded-full
                   focus:outline-none focus:bg-white

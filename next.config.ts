@@ -30,8 +30,41 @@ const nextConfig: NextConfig = {
         port: port,
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: hostname,
+        port: port,
+        pathname: '/uploads/**',
+      },
     ],
+    unoptimized: true, // For better compatibility
   },
+  // Add experimental features for better SSR
+  experimental: {
+    optimizePackageImports: ['swiper'],
+  },
+  // Add headers for CORS
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PUT, DELETE, OPTIONS' },
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type, Authorization' },
+        ],
+      },
+    ]
+  },
+  // Suppress hydration warnings for development
+  onDemandEntries: {
+    // period (in ms) where the server will keep pages in the buffer
+    maxInactiveAge: 25 * 1000,
+    // number of pages that should be kept simultaneously without being disposed
+    pagesBufferLength: 2,
+  },
+  // Disable strict mode for development to reduce hydration issues
+  reactStrictMode: false,
 };
 
 export default nextConfig;

@@ -10,10 +10,19 @@ export default function Home() {
   const [overseasTrip, setOverseasTrip] = useState<ProductItem[]>([])
   const [domesticTrip, setDomesticTrip] = useState<ProductItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+
     const fetchProducts = async () => {
       try {
+        setError(null)
         const products = await productApi.getAll()
         
         // Sort by sold value in descending order
@@ -49,18 +58,39 @@ export default function Home() {
         setDomesticTrip(domestic)
       } catch (error) {
         console.error('Error getting product data:', error)
+        setError(error instanceof Error ? error.message : 'Failed to load products')
       } finally {
         setLoading(false)
       }
     }
 
     fetchProducts()
-  }, [])
+  }, [mounted])
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="text-lg">Loading...</div>
+      </div>
+    )
+  }
 
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <div className="text-lg">Loading...</div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="text-center">
+          <p className="text-red-600 mb-2">Failed to load products</p>
+          <p className="text-sm text-gray-500">{error}</p>
+        </div>
       </div>
     )
   }
