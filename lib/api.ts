@@ -134,7 +134,7 @@ export interface SlideItem {
 export interface ProductItem {
   id: number
   tripType: string
-  imgSrc: string
+  imgSrc: string | null
   discountRate?: number
   title: string
   infoGroup: string[]
@@ -142,6 +142,9 @@ export interface ProductItem {
   currPrice: number
   rating: number
   sold: number
+  introTitle: string
+  introText: string
+  introImgSrc: string | null
   createdAt: string
   updatedAt: string
 }

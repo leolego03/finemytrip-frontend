@@ -10,7 +10,7 @@ import { getStarTypes } from '../utils/getStarTypes'
 export interface ProductItem {
   id: number,
   tripType: string
-  imgSrc: string
+  imgSrc: string | null
   discountRate?: number
   title: string
   infoGroup: string[]
@@ -50,14 +50,16 @@ export default function ProductSlide({
                   className="focus-product-item block cursor-pointer"
                 >
                   <div className="thum relative w-full h-[120px]">
-                    <Image
-                      src={p.imgSrc}
-                      alt={p.title}
-                      width={768}
-                      height={500}
-                      className="w-full h-full object-cover rounded"
-                      priority={p.id === items[0]?.id}
-                    />
+                    {p.imgSrc && (
+                      <Image
+                        src={p.imgSrc}
+                        alt={p.title}
+                        width={768}
+                        height={500}
+                        className="w-full h-full object-cover rounded"
+                        priority={p.id === items[0]?.id}
+                      />
+                    )}
                     {typeof p.discountRate === 'number' && (
                       <span className="badge discount absolute bottom-2 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-l">
                         {p.discountRate}% Off

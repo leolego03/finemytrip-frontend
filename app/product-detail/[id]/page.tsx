@@ -26,9 +26,16 @@ export default function ProductDetailPage() {
         const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080'
         const updatedProduct = {
           ...product,
-          imgSrc: product.imgSrc.startsWith('/uploads/') 
-            ? `${backendUrl}${product.imgSrc}`
-            : product.imgSrc
+          imgSrc: product.imgSrc
+            ? (product.imgSrc.startsWith('/uploads/') 
+              ? `${backendUrl}${product.imgSrc}`
+              : product.imgSrc)
+            : null,
+          introImgSrc: product.introImgSrc 
+            ? (product.introImgSrc.startsWith('/uploads/') 
+              ? `${backendUrl}${product.introImgSrc}`
+              : product.introImgSrc)
+            : null
         }
         
         setProductDetail(updatedProduct)
@@ -68,7 +75,7 @@ export default function ProductDetailPage() {
     <>
       <section
         className="product-detail-image bg-cover bg-center"
-        style={{ backgroundImage: `url(${productDetail.imgSrc})` }}
+        style={productDetail.imgSrc ? { backgroundImage: `url(${productDetail.imgSrc})` } : {}}
       >
         <div className="product-detail-image-inner flex flex-col items-center pt-8">
           <div className="cover-image w-full">
@@ -86,7 +93,7 @@ export default function ProductDetailPage() {
 
       <section className="product-detail-full bg-gray-100">
         <div className="product-detail-full-inner">
-          <div className="product-detail-full-content flex flex-col-reverse gap-8">
+          <div className="product-detail-full-content flex flex-col gap-8">
             <div className="product-detail-sidebar bg-white p-3 w-full">
               <div className="group-required-info mb-6">
                 <div className="hash-tag-group text-sm mb-2">
@@ -211,6 +218,68 @@ export default function ProductDetailPage() {
               >
                 <i className="bi bi-chat-left-text mr-1"></i>1:1 Inquiry Before Booking
               </Link>
+            </div>
+            
+            <div className="product-detail-info bg-white p-3 w-full">
+              <div
+                className="border-b border-gray-200 h-[50px] flex gap-2.5 items-center bg-white py-[30px]
+                      sticky top-[120px] z-20 overflow-y-hidden"
+              >
+                <a
+                  href="#feature1"
+                  className="relative text-sm whitespace-nowrap font-medium pb-[10px] border-b-[3px] border-black"
+                >
+                  Product Introduction
+                </a>
+                <a href="#feature2" className="relative text-sm whitespace-nowrap">
+                  Traveling Course
+                </a>
+                <a href="#feature3" className="relative text-sm whitespace-nowrap">
+                  Product Review(223)
+                </a>
+                <a href="#feature4" className="relative text-sm whitespace-nowrap">
+                  FAQ
+                </a>
+                <a href="#feature5" className="relative text-sm whitespace-nowrap">
+                  About The Agency
+                </a>
+              </div>
+
+              <article id="feature1" className="mt-[30px]">
+                <div className="relative pl-[10px] my-[30px]">
+                  <span className="absolute left-0 top-[5px] w-[4px] h-[43px] bg-[#ed2040]"></span>
+                  <h2 className="text-xl font-medium">Product Introduction</h2>
+                  <span className="text-sm text-gray-600">
+                    {productDetail.introTitle}
+                  </span>
+                </div>
+
+                <div className="mt-[20px]">
+                  <h2 className="font-normal text-2xl leading-snug">
+                    If you want to make <b>special memories</b>,<br />
+                    make a reservation <b>right now!</b>
+                  </h2>
+                  <p className="mt-4 text-base leading-relaxed">
+                    {productDetail.introText}
+                  </p>
+
+                  {productDetail.introImgSrc && (
+                    <div
+                      className="my-[20px] mx-auto text-center p-[30px]"
+                    >
+                      <figure className="w-full h-auto m-0">
+                        <Image
+                          src={productDetail.introImgSrc}
+                          alt=""
+                          width={473}
+                          height={390}
+                          className="w-full h-auto"
+                        />
+                      </figure>
+                    </div>
+                  )}
+                </div>
+              </article>
             </div>
           </div>
         </div>

@@ -27,18 +27,22 @@ export default function Home() {
           .filter(product => product.tripType === 'overseas')
           .map(product => ({
             ...product,
-            imgSrc: product.imgSrc.startsWith('/uploads/') 
-              ? `${backendUrl}${product.imgSrc}`
-              : product.imgSrc
+            imgSrc: product.imgSrc 
+              ? (product.imgSrc.startsWith('/uploads/') 
+                ? `${backendUrl}${product.imgSrc}`
+                : product.imgSrc)
+              : null
           }))
         
         const domestic = sortedProducts
           .filter(product => product.tripType === 'domestic')
           .map(product => ({
             ...product,
-            imgSrc: product.imgSrc.startsWith('/uploads/') 
-              ? `${backendUrl}${product.imgSrc}`
-              : product.imgSrc
+            imgSrc: product.imgSrc 
+              ? (product.imgSrc.startsWith('/uploads/') 
+                ? `${backendUrl}${product.imgSrc}`
+                : product.imgSrc)
+              : null
           }))
         
         setOverseasTrip(overseas)
