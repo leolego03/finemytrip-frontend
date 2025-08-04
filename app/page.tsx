@@ -36,10 +36,10 @@ export default function Home() {
           .filter(product => product.tripType === 'overseas')
           .map(product => ({
             ...product,
-            imgSrc: product.imgSrc 
-              ? (product.imgSrc.startsWith('/uploads/') 
-                ? `${backendUrl}${product.imgSrc}`
-                : product.imgSrc)
+            thumbnailSrc: product.thumbnailSrc 
+              ? (product.thumbnailSrc.startsWith('/uploads/') 
+                ? `${backendUrl}${product.thumbnailSrc}`
+                : product.thumbnailSrc)
               : null
           }))
         
@@ -47,10 +47,10 @@ export default function Home() {
           .filter(product => product.tripType === 'domestic')
           .map(product => ({
             ...product,
-            imgSrc: product.imgSrc 
-              ? (product.imgSrc.startsWith('/uploads/') 
-                ? `${backendUrl}${product.imgSrc}`
-                : product.imgSrc)
+            thumbnailSrc: product.thumbnailSrc 
+              ? (product.thumbnailSrc.startsWith('/uploads/') 
+                ? `${backendUrl}${product.thumbnailSrc}`
+                : product.thumbnailSrc)
               : null
           }))
         

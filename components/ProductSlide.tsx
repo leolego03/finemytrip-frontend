@@ -10,7 +10,7 @@ import { getStarTypes } from '../utils/getStarTypes'
 export interface ProductItem {
   id: number,
   tripType: string
-  imgSrc: string | null
+  thumbnailSrc: string | null
   discountRate?: number
   title: string
   infoGroup: string[]
@@ -50,9 +50,9 @@ export default function ProductSlide({
                   className="focus-product-item block cursor-pointer"
                 >
                   <div className="thum relative w-full h-[120px]">
-                    {p.imgSrc && (
+                    {p.thumbnailSrc && (
                       <Image
-                        src={p.imgSrc}
+                        src={p.thumbnailSrc}
                         alt={p.title}
                         width={768}
                         height={500}

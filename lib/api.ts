@@ -134,6 +134,7 @@ export interface SlideItem {
 export interface ProductItem {
   id: number
   tripType: string
+  thumbnailSrc: string | null
   imgSrc: string | null
   discountRate?: number
   title: string
